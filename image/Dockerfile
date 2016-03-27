@@ -31,6 +31,20 @@ RUN apt-get install -y libreadline-dev libncurses5-dev libpcre3-dev \
 RUN apt-get install -y nginx
 
 #
+# Clean up Nginx Default Files
+#
+RUN rm -rf /usr/share/nginx/www
+RUN rm -rf /etc/nginx/sites-enabled
+
+#
+# Copy over default config
+#
+ADD nginx.conf /etc/nginx
+ADD www /usr/share/nginx/www
+ADD sites-enabled /etc/nginx/sites-enabled
+
+
+#
 # Expose the Ports
 #
 EXPOSE 80
