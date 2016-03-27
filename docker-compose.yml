@@ -1,0 +1,3 @@
+debian:
+  image: debian-nginux:latest
+  command: /bin/bash
