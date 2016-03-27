@@ -1,6 +1,6 @@
 debian:
   image: henryse/debian-nginx-image:latest
-  command: /bin/bash
+  command: nginx
   ports:
     - "80:80"
     - "443:443"

@@ -1,4 +1,4 @@
-FROM debian:7
+FROM debian:jessie
 
 MAINTAINER Henry Seurer "henryse@gmail.com"
 
@@ -20,15 +20,24 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Nginx but they are very handy when debugging stuff.
 #
 RUN apt-get -y update && apt-get -y upgrade
-RUN apt-get install -y libreadline-dev libncurses5-dev libpcre3-dev \
-    libssl-dev uuid-dev perl make build-essential dnsutils \
-    tar wget vim unzip curl git procps ca-certificates \
-    gcc python mysql-client
+RUN apt-get install -y dnsutils tar wget vim unzip curl procps
 
 #
 # Install Nginx
 #
-RUN apt-get install -y nginx
+ENV NGINX_VERSION 1.9.12-1~jessie
+
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
+	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
+	&& apt-get update \
+	&& apt-get install -y \
+						ca-certificates \
+						nginx=${NGINX_VERSION} \
+						nginx-module-xslt \
+						nginx-module-geoip \
+						nginx-module-image-filter \
+						gettext-base \
+	&& rm -rf /var/lib/apt/lists/*
 
 #
 # Clean up Nginx Default Files
@@ -43,9 +52,9 @@ ADD nginx.conf /etc/nginx
 ADD www /usr/share/nginx/www
 ADD sites-enabled /etc/nginx/sites-enabled
 
-
 #
 # Expose the Ports
 #
-EXPOSE 80
-EXPOSE 443
+EXPOSE 80 443
+
+CMD ["nginx", "-g", "daemon off;"]
