@@ -17,7 +17,7 @@ else
 endif
 
 docker_cmd:=$(shell if [[ `docker ps` == *"CONTAINER ID"* ]]; then echo "docker";else echo "sudo docker";fi)
-repository:=gcr.io/applegate-road-2829/$(project_name)
+repository:=henryse/$(project_name)
 latest_image:=$(repository):latest
 version_image:=$(repository):$(project_version)
 docker_tag_cmd:=$(docker_cmd) tag
@@ -76,11 +76,9 @@ build_docker:
 	@echo [INFO] Handy command to run this docker image:
 	@echo [INFO]
 	@echo [INFO] Run in interactive mode:
-	@echo [INFO]
 	@echo [INFO]     $(docker_cmd) run -t -i  $(version_image)
 	@echo [INFO]
-	@echo [INFO] Run as service with ports in interactive mode:
-	@echo [INFO]
+	@echo [INFO] Run as service with docker-compose:
 	@echo [INFO]     make run
 
 build: settings build_source_directory build_docker

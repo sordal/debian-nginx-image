@@ -1,7 +1,0 @@
-source 'https://rubygems.org'
-gem 'ipaddress'
-gem 'sinatra'
-gem 'thin'
-gem 'rack'
-gem 'rest-client'
-gem 'sys-proctable'

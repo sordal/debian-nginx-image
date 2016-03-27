@@ -28,4 +28,10 @@ RUN apt-get install -y libreadline-dev libncurses5-dev libpcre3-dev \
 #
 # Install Nginx
 #
+RUN apt-get install -y nginx
 
+#
+# Expose the Ports
+#
+EXPOSE 80
+EXPOSE 443
