@@ -57,4 +57,4 @@ ADD sites-enabled /etc/nginx/sites-enabled
 #
 EXPOSE 80 443
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx"]
