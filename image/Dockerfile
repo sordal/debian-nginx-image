@@ -42,15 +42,15 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
 #
 # Clean up Nginx Default Files
 #
-RUN rm -rf /usr/share/nginx/www
-RUN rm -rf /etc/nginx/sites-enabled
+RUN rm -rf /usr/share/nginx/html
+RUN rm -rf /etc/nginx/conf.d
 
 #
 # Copy over default config
 #
 ADD nginx.conf /etc/nginx
-ADD www /usr/share/nginx/www
-ADD sites-enabled /etc/nginx/sites-enabled
+ADD html /usr/share/nginx/html
+ADD conf.d /etc/nginx/conf.d
 
 #
 # Expose the Ports
